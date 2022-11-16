@@ -4,8 +4,7 @@ provider "horizon" {
   endpoint  = "https://horizon-qa.evertrust.io"
 }
 
-resource "horizon_certificate" "test" {
-
+resource "horizon_certificate" "test3" {
   subject {
     element = "CN"
     type    = "CN"
@@ -43,16 +42,17 @@ l/UlydOTQcxGMMcliu4GeQzh6RhqB3IcQttqwXdIQh1HRiUZPIv6rQ==
 EOT
 }
 
-resource "horizon_certificate" "test2" {
+resource "horizon_certificate" "test" {
+  
   subject {
     element = "CN"
     type    = "CN"
-    value   = "TestTerraformFill5"
+    value   = "TestTerraformRevokeOnDelete"
   }
   sans {
     element = "DNSNAME"
     type    = "DNSNAME"
-    value   = "TestTerraformFill5"
+    value   = "TestTerraformRevokeOnDelete"
   }
   labels {
     label   = "business_units"
@@ -60,20 +60,13 @@ resource "horizon_certificate" "test2" {
   }
   profile   = "TerraformTest"
   key_type  = "rsa-2048"  
+  revoke_on_delete = false
 }
 
 output "test-id" {
-  value     = horizon_certificate.test2.id
+  value     = horizon_certificate.test.id
 }
 
 output "test-cert" {
-  value     = horizon_certificate.test2.certificate
-}
-
-output "test-key" {
-  value     = horizon_certificate.test2.key_type
-}
-
-output "not-after" {
-  value     = horizon_certificate.test2.not_after
+  value     = horizon_certificate.test.certificate
 }
