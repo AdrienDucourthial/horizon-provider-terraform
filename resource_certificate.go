@@ -246,8 +246,7 @@ func resourceCertificateCreate(ctx context.Context, d *schema.ResourceData, m in
 
 		// SetId => Mandatory
 		d.SetId(res.Certificate.Id)
-		// d.Get("certificate")
-		// d.Set("certificate", string(res.Certificate.Certificate))
+
 		fillCertificateSchema(
 			d,
 			string(res.Certificate.Module),
@@ -278,7 +277,7 @@ func resourceCertificateCreate(ctx context.Context, d *schema.ResourceData, m in
 			typeCounts[dn["type"].(string)]++
 			subject = append(subject, requests.IndexedDNElement{
 				Element: fmt.Sprintf("%s.%d", strings.ToLower(dn["type"].(string)), typeCounts[dn["type"].(string)]),
-				Type:    dn["type"].(string),
+				Type:    strings.ToUpper(dn["type"].(string)),
 				Value:   fmt.Sprintf("%v", dn["value"].(string)),
 			})
 		}
@@ -292,7 +291,7 @@ func resourceCertificateCreate(ctx context.Context, d *schema.ResourceData, m in
 			typeCounts[san["type"].(string)]++
 			sans = append(sans, requests.IndexedSANElement{
 				Element: fmt.Sprintf("%s.%d", strings.ToLower(san["type"].(string)), typeCounts[san["type"].(string)]),
-				Type:    san["type"].(string),
+				Type:    strings.ToUpper(san["type"].(string)),
 				Value:   fmt.Sprintf("%v", san["value"].(string)),
 			})
 		}
@@ -306,8 +305,6 @@ func resourceCertificateCreate(ctx context.Context, d *schema.ResourceData, m in
 
 		// SetId => Mandatory
 		d.SetId(res.Certificate.Id)
-		// d.Get("certificate")
-		// d.Set("certificate", string(res.Certificate.Certificate))
 
 		fillCertificateSchema(
 			d,
