@@ -16,4 +16,3 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with: 
           commit_message: Push docs
-          repository: ./horizon-provider-terraform
