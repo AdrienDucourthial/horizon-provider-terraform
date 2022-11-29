@@ -28,8 +28,9 @@ func resourceCertificate() *schema.Resource {
 				Computed: true,
 			},
 			"profile": {
-				Type:     schema.TypeString,
-				Required: true,
+				Description: "le profile truc",
+				Type:        schema.TypeString,
+				Required:    true,
 			},
 			"owner": {
 				Type:     schema.TypeString,
